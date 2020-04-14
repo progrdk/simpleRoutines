@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Simple Routines Homepage</title>
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="containerForHiddenScrollbar">
+      <div class="containerWithHiddenScrollbar">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-5">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand" href="#">Navbar</a>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#"
+                  >Home <span class="sr-only">(current)</span></a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link disabled"
+                  href="#"
+                  tabindex="-1"
+                  aria-disabled="true"
+                >
+                  Disabled
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main class="container">
+          <div class="list-group mb-3">
+            <div class="list-group-item list-group-item-action collapsable">
+              <h5 class="collapsableHeader mb-3">Activity 1</h5>
+              <form>
+                <div class="list-group list-group-flush">
+                  <div
+                    class="list-group-item list-group-item-action collapsable"
+                  >
+                    <h6 class="collapsableHeader">Name, Description</h6>
+                    <div class="container">
+                      <fieldset class="form-group">
+                        <label for="Name-1">Name:</label>
+                        <input
+                          type="text"
+                          name=""
+                          id="Name-1"
+                          class="form-control"
+                        />
+                      </fieldset>
+                      <fieldset class="form-group">
+                        <label for="Description-1">Description:</label>
+                        <textarea
+                          name=""
+                          id="Description-1"
+                          class="form-control"
+                        ></textarea>
+                      </fieldset>
+                    </div>
+                  </div>
+                  <div
+                    class="list-group-item list-group-item-action collapsable"
+                  >
+                    <h6 class="collapsableHeader">Activity Scheme:</h6>
+                    <div class="container">
+                      <fieldset class="form-group">
+                        <label for="TimesPerDay-1">Times per day:</label>
+                        <input
+                          type="number"
+                          name=""
+                          id="TimesPerDay-1"
+                          class="form-control"
+                          min="1"
+                          step="1"
+                        />
+                      </fieldset>
+                      <label
+                        aria-label="Choose between Times per day or Interval"
+                        >-or-</label
+                      >
+                      <fieldset class="form-group">
+                        <label for="Interval-1">Interval:</label>
+                        <input
+                          type="number"
+                          name=""
+                          id="Interval-1"
+                          class="form-control"
+                          min="1"
+                          step="1"
+                        />
+                        <small
+                          >Time in minutes between 2 occasions of the
+                          activity.</small
+                        >
+                      </fieldset>
+                      <fieldset class="form-group">
+                        <label for="Duration-1">Duration:</label>
+                        <input
+                          type="number"
+                          name=""
+                          id="Duration-1"
+                          class="form-control"
+                          min="1"
+                          step="1"
+                        />
+                        <small
+                          >Time in minutes that 1 occasion of the activity
+                          occupies.</small
+                        >
+                      </fieldset>
+                    </div>
+                  </div>
+                  <div class="list-group-item list-group-item-action">
+                    <h6 class="">Date of start:</h6>
+                    <div class="container">
+                      <fieldset class="form-group">
+                        <input
+                          class="checkbox-valign-middle enabler"
+                          data-target="StartAt-1"
+                          type="checkbox"
+                          name=""
+                          aria-label="Activate postone input"
+                        />
+                        <label for="StartAt-1">Postpone start:</label>
+                        <input
+                          type="date"
+                          name=""
+                          id="StartAt-1"
+                          class="form-control"
+                          min="today"
+                          disabled
+                        />
+                      </fieldset>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="list-group-item list-group-item-action collapsable">
+              <h5 class="collapsableHeader mb-3">Activity 2</h5>
+              <form>
+                <div class="list-group list-group-flush">
+                  <div
+                    class="list-group-item list-group-item-action collapsable"
+                  >
+                    <h6 class="collapsableHeader">Name, Description</h6>
+                    <div class="container">
+                      <fieldset class="form-group">
+                        <label for="Name-2">Name:</label>
+                        <input
+                          type="text"
+                          name=""
+                          id="Name-2"
+                          class="form-control"
+                        />
+                      </fieldset>
+                      <fieldset class="form-group">
+                        <label for="Description-2">Description:</label>
+                        <textarea
+                          name=""
+                          id="Description"
+                          class="form-control"
+                        ></textarea>
+                      </fieldset>
+                    </div>
+                  </div>
+                  <div
+                    class="list-group-item list-group-item-action collapsable"
+                  >
+                    <h6 class="collapsableHeader">Activity Scheme:</h6>
+                    <div class="container">
+                      <fieldset class="form-group">
+                        <label for="TimesPerDay-2">Times per day:</label>
+                        <input
+                          type="number"
+                          name=""
+                          id="TimesPerDay-2"
+                          class="form-control"
+                          min="1"
+                          step="1"
+                        />
+                      </fieldset>
+                      <label
+                        aria-label="Choose between Times per day or Interval"
+                        >-or-</label
+                      >
+                      <fieldset class="form-group">
+                        <label for="Interval-2">Interval:</label>
+                        <input
+                          type="number"
+                          name=""
+                          id="Interval-2"
+                          class="form-control"
+                          min="1"
+                          step="1"
+                        />
+                        <small
+                          >Time in minutes between 2 occasions of the
+                          activity.</small
+                        >
+                      </fieldset>
+                      <fieldset class="form-group">
+                        <label for="Duration-2">Duration:</label>
+                        <input
+                          type="number"
+                          name=""
+                          id="Duration-2"
+                          class="form-control"
+                          min="1"
+                          step="1"
+                        />
+                        <small
+                          >Time in minutes that 1 occasion of the activity
+                          occupies.</small
+                        >
+                      </fieldset>
+                    </div>
+                  </div>
+                  <div class="list-group-item list-group-item-action">
+                    <h6 class="">Date of start:</h6>
+                    <div class="container">
+                      <fieldset class="form-group">
+                        <input
+                          class="checkbox-valign-middle enabler"
+                          data-target="StartAt-2"
+                          type="checkbox"
+                          name=""
+                          aria-label="Activate postone input"
+                        />
+                        <label for="StartAt-2">Postpone start:</label>
+                        <input
+                          type="date"
+                          name=""
+                          id="StartAt-2"
+                          class="form-control"
+                          min="today"
+                          disabled
+                        />
+                      </fieldset>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="js/childrenAutoCollapse.js"></script>
+    <script src="js/checkboxEnabler.js"></script>
+    <script src="js/inputDatesTodayInjector.js"></script>
+    <script src="js/main.js"></script>
+    <script src="vendor/jquery/jquery-3.4.1.slim.min.js"></script>
+    <script src="vendor/popper/popper-2.2.1.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

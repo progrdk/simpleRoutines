@@ -1,0 +1,135 @@
+/* Hidden scrollbar */
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.containerForHiddenScrollbar {
+  height: 100%;
+  overflow: hidden;
+}
+
+.containerWithHiddenScrollbar {
+  height: 100%;
+  overflow: auto;
+}
+
+.containerWithHiddenScrollbar {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+.containerWithHiddenScrollbar::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+/* Collapsable */
+
+.collapsable {
+  position: relative;
+  min-height: 45px;
+  max-height: 45px;
+  overflow-y: hidden;
+}
+
+.collapsable > .collapsableHeader::after {
+  content: url("../sources/icons/chevron-down.svg");
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+  vertical-align: middle;
+  position: relative;
+  left: 1%;
+}
+
+.collapsable.expanded {
+  max-height: 100rem;
+  overflow-y: hidden;
+}
+
+.collapsable.expanded > .collapsableHeader::after {
+  content: url("../sources/icons/chevron-up.svg");
+}
+
+/* Animate collapse & expand */
+
+.collapsable.expanding {
+  max-height: 100rem;
+  transition: max-height 1s cubic-bezier(1, 0.3, 1, 0);
+}
+
+.collapsable.collapsing {
+  /* Must override all since bootstrap conflict */
+  height: auto !important;
+  max-height: 45px !important;
+  transition: max-height 0.7s cubic-bezier(0, 1, 0, 1) !important;
+}
+
+.collapsable.expanded:hover,
+.collapsable.expanded:active,
+.collapsable.expanding:hover,
+.collapsable.expanding:active {
+  background: #fff;
+}
+
+.collapsableHeader:hover {
+  cursor: pointer;
+}
+
+/* Animate chevron icon on expand & collapse  */
+
+/* "transition" states classes are required */
+/* to implement "clean of additional classes" initial state */
+.collapsable.expanding > .collapsableHeader::after {
+  animation-name: chevronClockwise180;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+.collapsable.collapsing > .collapsableHeader::after {
+  animation-name: chevronAntiClockwise180;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+/* Common styles */
+
+.borderLess {
+  border: none;
+}
+
+.borderSquare {
+  border-radius: 0 !important;
+}
+
+input[type="checkbox"].enabler {
+  height: 1rem;  
+  width: 1rem;
+}
+
+.checkbox-valign-middle {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Keyframes */
+
+@keyframes chevronClockwise180 {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes chevronAntiClockwise180 {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(-180deg);
+  }
+}
