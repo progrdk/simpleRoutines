@@ -10,7 +10,7 @@
   </head>
   <body>
     <div class="containerForHiddenScrollbar">
-      <div class="containerWithHiddenScrollbar">
+      <div class="containerWithHiddenScrollbar page-container">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
           <button
             class="navbar-toggler"
@@ -67,16 +67,7 @@
             </ul>
           </div>
         </nav>
-
-        <main class="container">
-          <h2 class="mb-4">Routines</h2>
-          <div id="list-routines" class="list-group mb-3"></div>
-          <button
-            id="add-routine"
-            class="btn btn-primary fixed-bottom button-add"
-            type="button"
-          ></button>
-        </main>
+        <!-- Insert instantiated main sections here -->
       </div>
     </div>
 
@@ -89,9 +80,9 @@
               <h6 class="collapsable-header">Name, Description</h6>
               <div class="container">
                 <fieldset class="form-group">
-                  <label for="Name-2">Name:</label>
+                  <label for="Name-">Name:</label>
                   <input
-                    id="Name-2"
+                    id="Name-"
                     class="form-control"
                     type="text"
                     name=""
@@ -99,10 +90,10 @@
                   />
                 </fieldset>
                 <fieldset class="form-group">
-                  <label for="Description-2">Description:</label>
+                  <label for="Description-">Description:</label>
                   <textarea
                     name=""
-                    id="Description"
+                    id="Description-"
                     class="form-control"
                   ></textarea>
                 </fieldset>
@@ -112,11 +103,11 @@
               <h6 class="collapsable-header">Routine Scheme:</h6>
               <div class="container">
                 <fieldset class="form-group">
-                  <label for="TimesPerDay-2">Times per day:</label>
+                  <label for="TimesPerDay-">Times per day:</label>
                   <input
                     type="number"
                     name=""
-                    id="TimesPerDay-2"
+                    id="TimesPerDay-"
                     class="form-control"
                     min="1"
                     step="1"
@@ -126,31 +117,31 @@
                   >-or-</label
                 >
                 <fieldset class="form-group">
-                  <label for="Interval-2">Interval:</label>
+                  <label for="Interval-">Interval:</label>
                   <input
                     type="number"
                     name=""
-                    id="Interval-2"
+                    id="Interval-"
                     class="form-control"
                     min="1"
                     step="1"
                   />
                   <small
-                    >Time in minutes between 2 occasions of the activity.</small
+                    >Time in minutes between 2 occasions of the routine.</small
                   >
                 </fieldset>
                 <fieldset class="form-group">
-                  <label for="Duration-2">Duration:</label>
+                  <label for="Duration-">Duration:</label>
                   <input
                     type="number"
                     name=""
-                    id="Duration-2"
+                    id="Duration-"
                     class="form-control"
                     min="1"
                     step="1"
                   />
                   <small
-                    >Time in minutes that 1 occasion of the activity
+                    >Time in minutes that 1 occasion of the routine
                     occupies.</small
                   >
                 </fieldset>
@@ -167,11 +158,11 @@
                     name=""
                     aria-label="Activate postone input"
                   />
-                  <label for="StartAt-2">Postpone start:</label>
+                  <label for="StartAt-">Postpone start:</label>
                   <input
                     type="date"
                     name=""
-                    id="StartAt-2"
+                    id="StartAt-"
                     class="form-control"
                     min="today"
                     disabled
@@ -182,6 +173,147 @@
           </div>
         </form>
       </div>
+    </template>
+    <template id="new-schedule">
+      <div class="list-group-item list-group-item-action collapsable">
+        <h5 class="collapsable-header mb-3">Schedule</h5>
+        <form>
+          <div class="list-group list-group-flush">
+            <div class="list-group-item list-group-item-action collapsable">
+              <h6 class="collapsable-header">Name, Description</h6>
+              <div class="container">
+                <fieldset class="form-group">
+                  <label for="Name-">Name:</label>
+                  <input
+                    id="Name-"
+                    class="form-control"
+                    type="text"
+                    name=""
+                    data-assignment="schedule-name"
+                  />
+                </fieldset>
+                <fieldset class="form-group">
+                  <label for="Description-">Description:</label>
+                  <textarea
+                    name=""
+                    id="Description-"
+                    class="form-control"
+                  ></textarea>
+                </fieldset>
+              </div>
+            </div>
+            <div class="list-group-item list-group-item-action collapsable">
+              <h6 class="collapsable-header">Schedule Scheme:</h6>
+              <div class="container">
+                <div
+                  class="btn-group mb-2 mt-3 d-flex"
+                  role="group"
+                  aria-label="Click a button to open corresponding options"
+                >
+                  <button class="btn btn-secondary border-right" type="button">
+                    Times
+                  </button>
+                  <button class="btn btn-secondary border-left" type="button">
+                    Intervals
+                  </button>
+                </div>
+                <fieldset class="form-group collapsable collapsable-0">
+                  <div
+                    aria-label="Choose between Times per month or Times per week"
+                  ></div>
+                  <label for="TimesPerMonth-">Times per month:</label>
+                  <input
+                    type="number"
+                    name=""
+                    id="TimesPerMonth-"
+                    class="form-control"
+                    min="1"
+                    step="1"
+                    max="31"
+                  />
+                  <div class="mb-2 mt-2">-or-</div>
+                  <label for="TimesPerWeek-">Times per week:</label>
+                  <input
+                    type="number"
+                    name=""
+                    id="TimesPerWeek-"
+                    class="form-control"
+                    min="1"
+                    step="1"
+                    max="7"
+                  />
+                </fieldset>
+                <fieldset class="form-group collapsable collapsable-0">
+                  <div area-label="Choose either of inputs"></div>
+                  <label for="TimesPerWeek-">Interval in days:</label>
+                  <input
+                    type="number"
+                    name=""
+                    id="TimesPerWeek-"
+                    class="form-control"
+                    min="1"
+                    step="1"
+                  />
+                  <div class="mb-2 mt-2">-or-</div>
+                  <label for="TimesPerWeek-">Interval in weeks:</label>
+                  <input
+                    type="number"
+                    name=""
+                    id="TimesPerWeek-"
+                    class="form-control"
+                    min="1"
+                    step="1"
+                    max="7"
+                  />
+                  <div class="mb-2 mt-2">-or-</div>
+                  <label for="TimesPerWeek-">Interval in months:</label>
+                  <input
+                    type="number"
+                    name=""
+                    id="TimesPerWeek-"
+                    class="form-control"
+                    min="1"
+                    step="1"
+                    max="7"
+                  />
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </template>
+    <template id="btn-add-routine">
+      <button
+        id="add-routine"
+        class="btn btn-primary fixed-bottom button-add"
+        type="button"
+      ></button>
+    </template>
+    <template id="btn-add-schedule">
+      <button
+        id="add-schedule"
+        class="btn btn-primary fixed-bottom button-add"
+        type="button"
+      ></button>
+    </template>
+    <template id="page-routines">
+      <main class="container">
+        <h2 class="mb-4">Routines</h2>
+        <div id="list-routines" class="list-group mb-3">
+          <!-- Insert instantiated Routine Elements here -->
+        </div>
+        <!-- Insert instantiated routine add button here -->
+      </main>
+    </template>
+    <template id="page-schedules">
+      <main class="container">
+        <h2 class="mb-4">Schedules</h2>
+        <div id="list-schedules" class="list-group mb-3">
+          <!-- Insert instantiated Schedule Elements here -->
+        </div>
+        <!-- Insert instantiated schedule add button here -->
+      </main>
     </template>
 
     <script src="js/expandCollapseInit.js"></script>

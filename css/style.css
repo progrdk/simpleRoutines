@@ -33,6 +33,11 @@ body {
   overflow-y: hidden;
 }
 
+.collapsable-0 {
+  min-height: 0px;
+  max-height: 0px;
+}
+
 .collapsable.expanded {
   max-height: 100rem;
   overflow-y: hidden;
