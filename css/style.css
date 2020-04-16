@@ -24,7 +24,7 @@ body {
   display: none; /* Safari and Chrome */
 }
 
-/* Collapsable */
+/* Collapsable element styles */
 
 .collapsable {
   position: relative;
@@ -33,23 +33,9 @@ body {
   overflow-y: hidden;
 }
 
-.collapsable > .collapsableHeader::after {
-  content: url("../sources/icons/chevron-down.svg");
-  display: inline-block;
-  height: 24px;
-  width: 24px;
-  vertical-align: middle;
-  position: relative;
-  left: 1%;
-}
-
 .collapsable.expanded {
   max-height: 100rem;
   overflow-y: hidden;
-}
-
-.collapsable.expanded > .collapsableHeader::after {
-  content: url("../sources/icons/chevron-up.svg");
 }
 
 /* Animate collapse & expand */
@@ -60,7 +46,7 @@ body {
 }
 
 .collapsable.collapsing {
-  /* Must override all since bootstrap conflict */
+  /* : must override all since bootstrap conflict */
   height: auto !important;
   max-height: 45px !important;
   transition: max-height 0.7s cubic-bezier(0, 1, 0, 1) !important;
@@ -73,25 +59,77 @@ body {
   background: #fff;
 }
 
-.collapsableHeader:hover {
+/* Collapsable heading styles */
+
+.collapsable-header {
+  text-transform: capitalize;
+}
+
+.collapsable-header:hover {
   cursor: pointer;
+}
+
+.collapsable > .collapsable-header::after {
+  content: url("../sources/icons/chevron-down.svg");
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+  vertical-align: middle;
+  position: relative;
+  left: 1%;
+}
+
+.collapsable.expanded > .collapsable-header::after {
+  content: url("../sources/icons/chevron-up.svg");
 }
 
 /* Animate chevron icon on expand & collapse  */
 
-/* "transition" states classes are required */
-/* to implement "clean of additional classes" initial state */
-.collapsable.expanding > .collapsableHeader::after {
+/* : "transition" states classes are required */
+/* :  to implement "clean of additional classes" initial state */
+.collapsable.expanding > .collapsable-header::after {
   animation-name: chevronClockwise180;
   animation-duration: 0.7s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
 }
-.collapsable.collapsing > .collapsableHeader::after {
+.collapsable.collapsing > .collapsable-header::after {
   animation-name: chevronAntiClockwise180;
   animation-duration: 0.7s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
+}
+
+/* Button adding elements style */
+
+.button-add {
+  margin: 0;
+  padding: 0;
+  width: 7vh;
+  height: 7vh;
+  bottom: 5vh;
+  left: 1vw;
+  border-radius: 50%;
+  box-shadow: none !important;
+}
+
+.button-add::after {
+  content: url("../sources/icons/plus.svg");
+  display: inline-block;
+  margin-top: 0.8vh;
+}
+
+/* : override bootstrap buttons remain dark */
+.button-add:focus {
+  background-color: #007bff !important;
+  border-color: #007bff !important;
+}
+
+/* : override bootstrap buttons remain dark */
+.button-add:hover {
+  color: #fff;
+  background-color: #0069d9 !important;
+  border-color: #0062cc !important;
 }
 
 /* Common styles */
@@ -105,7 +143,7 @@ body {
 }
 
 input[type="checkbox"].enabler {
-  height: 1rem;  
+  height: 1rem;
   width: 1rem;
 }
 
