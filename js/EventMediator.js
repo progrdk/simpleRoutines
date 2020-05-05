@@ -63,7 +63,7 @@ class EventMediator {
     // : clicked on button#add-routine
     if (e.target.id === "add-routine") {
       // : call handlers
-      appendElementFromTemplate("new-routine", "list-routines");
+      appendElementFromTemplate("routine-settings", "list-routines");
     }
   }
 }

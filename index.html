@@ -68,10 +68,78 @@
           </div>
         </nav>
         <!-- Insert instantiated main sections here -->
+        <main class="container">
+          <h2 class="mb-4">Routines</h2>
+          <div id="list-routines" class="list-group mb-3">
+            <div
+              class="list-group-item list-group-item-action collapsable collapsable-h70 routine-container-view-card-btn"
+            >
+              <div
+                class="caption d-flex mb-3 justify-content-between align-items-center"
+              >
+                <h5 class="collapsable-header mb-0">{Routine name}</h5>
+                <button
+                  class="btn btn-secondary btn-sm rounded-circle"
+                  type="button"
+                ></button>
+              </div>
+              <div class="routine-card card border-0 w-100">
+                <div
+                  id="{Routine name}-s_b_c"
+                  class="card-img-top d-flex flex-nowrap justify-content-center align-items-center"
+                  area-label="Percent stacked bar chart for completed and failed routine occasions."
+                >
+                  <div
+                    class="bg-success stacked-bar-item text-center text-light"
+                  >
+                    100%
+                  </div>
+                  <div
+                    class="bg-danger stacked-bar-item text-center text-light"
+                  >
+                    20%
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="d-flex flex-column">
+                    <p class="card-text mb-0 text-nowrap">Next occasion:</p>
+                    <div
+                      class="occasion-ctrl align-self-center d-flex flex-nowrap justify-content-center align-items-center"
+                    >
+                      <button
+                        class="skip-back btn btn-sm rounded-left mr-1"
+                        type="button"
+                      ></button>
+                      <span class="card-text text-nowrap">
+                        [17.04.2020 18:00]
+                      </span>
+                      <button
+                        class="skip-forward btn btn-sm rounded-right ml-1"
+                        type="button"
+                      ></button>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column">
+                    <p class="card-text mb-0 text-nowrap">Schedule:</p>
+                    <p class="card-text mb-0 align-self-center text-nowrap">
+                      {Schedule name / scheme}
+                    </p>
+                  </div>
+                  <button
+                    class="btn btn-primary btn-block mt-5 text-nowrap"
+                    type="button"
+                  >
+                    Edit Routine
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
       </div>
     </div>
 
-    <template id="new-routine">
+    <template id="routine-settings">
       <div class="list-group-item list-group-item-action collapsable">
         <h5 class="collapsable-header mb-3">Routine</h5>
         <form>
@@ -174,7 +242,7 @@
         </form>
       </div>
     </template>
-    <template id="new-schedule">
+    <template id="schedule-settings">
       <div class="list-group-item list-group-item-action collapsable">
         <h5 class="collapsable-header mb-3">Schedule</h5>
         <form>
@@ -217,7 +285,7 @@
                     Intervals
                   </button>
                 </div>
-                <fieldset class="form-group collapsable collapsable-0">
+                <fieldset class="form-group collapsable collapsable-h0">
                   <div
                     aria-label="Choose between Times per month or Times per week"
                   ></div>
@@ -243,7 +311,7 @@
                     max="7"
                   />
                 </fieldset>
-                <fieldset class="form-group collapsable collapsable-0">
+                <fieldset class="form-group collapsable collapsable-h0">
                   <div area-label="Choose either of inputs"></div>
                   <label for="TimesPerWeek-">Interval in days:</label>
                   <input
@@ -297,18 +365,18 @@
         type="button"
       ></button>
     </template>
-    <template id="page-routines">
+    <template id="page-routines-settings">
       <main class="container">
-        <h2 class="mb-4">Routines</h2>
+        <h2 class="mb-4">Routines Settings</h2>
         <div id="list-routines" class="list-group mb-3">
           <!-- Insert instantiated Routine Elements here -->
         </div>
         <!-- Insert instantiated routine add button here -->
       </main>
     </template>
-    <template id="page-schedules">
+    <template id="page-schedules-settings">
       <main class="container">
-        <h2 class="mb-4">Schedules</h2>
+        <h2 class="mb-4">Schedules Settings</h2>
         <div id="list-schedules" class="list-group mb-3">
           <!-- Insert instantiated Schedule Elements here -->
         </div>

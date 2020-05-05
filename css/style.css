@@ -33,9 +33,14 @@ body {
   overflow-y: hidden;
 }
 
-.collapsable-0 {
+.collapsable-h0 {
   min-height: 0px;
   max-height: 0px;
+}
+
+.collapsable-h70 {
+  min-height: 70px;
+  max-height: 70px;
 }
 
 .collapsable.expanded {
@@ -64,7 +69,7 @@ body {
   background: #fff;
 }
 
-/* Collapsable heading styles */
+/* Collapsable header styles */
 
 .collapsable-header {
   text-transform: capitalize;
@@ -74,7 +79,7 @@ body {
   cursor: pointer;
 }
 
-.collapsable > .collapsable-header::after {
+.collapsable .collapsable-header::after {
   content: url("../sources/icons/chevron-down.svg");
   display: inline-block;
   height: 24px;
@@ -84,7 +89,7 @@ body {
   left: 1%;
 }
 
-.collapsable.expanded > .collapsable-header::after {
+.collapsable.expanded .collapsable-header::after {
   content: url("../sources/icons/chevron-up.svg");
 }
 
@@ -92,17 +97,44 @@ body {
 
 /* : "transition" states classes are required */
 /* :  to implement "clean of additional classes" initial state */
-.collapsable.expanding > .collapsable-header::after {
+.collapsable.expanding .collapsable-header::after {
   animation-name: chevronClockwise180;
   animation-duration: 0.7s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
 }
-.collapsable.collapsing > .collapsable-header::after {
+.collapsable.collapsing .collapsable-header::after {
   animation-name: chevronAntiClockwise180;
   animation-duration: 0.7s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
+}
+
+/* Collapsable caption styles */
+/* : caption = container that holds header at least */
+
+.collapsable .caption {
+  height: 2.5rem;
+}
+
+.collapsable .caption > .btn {
+  width: 2rem;
+  height: 2rem;
+  background-image: url(../sources/icons/check.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.routine-card {
+  overflow: hidden;
+}
+
+.routine-card > .card-body {
+  padding: 1.25rem 0;
+}
+
+.routine-container-view-card-btn {
+  min-width: 242px;
 }
 
 /* Button adding elements style */
@@ -137,6 +169,38 @@ body {
   border-color: #0062cc !important;
 }
 
+/* Percent stacked bar chart styles */
+
+.stacked-bar-item {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.stacked-bar-item:not(:first-child) {
+  width: 0;
+  display: none;
+}
+
+
+.btn.skip-back,
+.btn.skip-forward {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.skip-back {
+  background-image: url(../sources/icons/skip-back.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.skip-forward {
+  background-image: url(../sources/icons/skip-forward.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 /* Common styles */
 
 .borderLess {
@@ -155,6 +219,10 @@ input[type="checkbox"].enabler {
 .checkbox-valign-middle {
   display: inline-block;
   vertical-align: middle;
+}
+
+.width-15 {
+  width: 15%;
 }
 
 /* Keyframes */
