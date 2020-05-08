@@ -1,41 +1,17 @@
 class Schedule {
   constructor() {
     // create object (clear from inheritance) for descriptor
-    let propDecriptor = Object.create(null);
-    propDecriptor.enumerable = true;
-    propDecriptor.configurable = false;
-    propDecriptor.writable = true;
+    let descriptor = Object.create(null);
+    descriptor.enumerable = true;
+    descriptor.configurable = false;
+    descriptor.writable = true;
     // create public properties for getters/setters
-    Object.defineProperty(this, "__timesPerMonth", {
-      enumerable: true,
-      configurable: false,
-      writable: true,
-    });
-    Object.defineProperty(this, "__timesPerWeek", {
-      enumerable: true,
-      configurable: false,
-      writable: true,
-    });
-    Object.defineProperty(this, "__intervalDays", {
-      enumerable: true,
-      configurable: false,
-      writable: true,
-    });
-    Object.defineProperty(this, "__intervalWeeks", {
-      enumerable: true,
-      configurable: false,
-      writable: true,
-    });
-    Object.defineProperty(this, "__intervalMonths", {
-      enumerable: true,
-      configurable: false,
-      writable: true,
-    });
-    Object.defineProperty(this, "__routines", {
-      enumerable: true,
-      configurable: false,
-      writable: true,
-    });
+    Object.defineProperty(this, "__timesPerMonth", descriptor);
+    Object.defineProperty(this, "__timesPerWeek", descriptor);
+    Object.defineProperty(this, "__intervalDays", descriptor);
+    Object.defineProperty(this, "__intervalWeeks", descriptor);
+    Object.defineProperty(this, "__intervalMonths", descriptor);
+    Object.defineProperty(this, "__routines", descriptor);
     // initialize routines with an empty protected array
     this.__routines = new ProtectedArray();
   }
@@ -79,9 +55,7 @@ class Schedule {
     return this.__routines;
   }
   set routines(v) {
-    throw new TypeError(
-      "Routines property can't be reassigned."
-    );
+    throw new TypeError("Routines property can't be reassigned.");
   }
 
   // TODO: finish implementing the class.

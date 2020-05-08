@@ -1,5 +1,5 @@
 /**
- * Class is designed to protect arrays from unintended/easy mutation.
+ * Dataset is designed to protect arrays from unintended/easy mutation.
  * Protection through complexity is applied.
  *
  * @class ProtectedArray
@@ -11,7 +11,7 @@ class ProtectedArray extends Array {
    *
    * @param {*} v Value to be inserted into dataset.
    * @param {*} context Object from where the call is performed.
-   * @param {*} caller Method that performs the call.
+   * @param {string} caller Method that performs the call.
    * @returns {number} New length of the dataset.
    * @memberof ProtectedArray
    */
@@ -33,7 +33,7 @@ class ProtectedArray extends Array {
    * This metod is a wrapper for it in Array. Refer Array.pop() documentation.
    *
    * @param {*} context Object from where the call is performed.
-   * @param {*} caller Method that performs the call.
+   * @param {string} caller Method that performs the call.
    * @returns {*} Value of the element taken from dataset.
    * @memberof ProtectedArray
    */
@@ -56,7 +56,7 @@ class ProtectedArray extends Array {
    *
    * @param {*} v Value to be inserted into dataset.
    * @param {*} context Object from where the call is performed.
-   * @param {*} caller Method that performs the call.
+   * @param {string} caller Method that performs the call.
    * @returns {number} New length of the dataset.
    * @memberof ProtectedArray
    */
@@ -78,7 +78,7 @@ class ProtectedArray extends Array {
    * This metod is a wrapper for it in Array. Refer Array.shift() documentation.
    *
    * @param {*} context Object from where the call is performed.
-   * @param {*} caller Method that performs the call.
+   * @param {string} caller Method that performs the call.
    * @returns {*} Value of the element taken from dataset.
    * @memberof ProtectedArray
    */
@@ -104,4 +104,6 @@ class ProtectedArray extends Array {
   sort() {
     throw new Error("This dataset doesn't support sorting.");
   }
+
+  // TODO: incapsulate code, repeated across methods in private service method
 }
