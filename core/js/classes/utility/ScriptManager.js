@@ -41,24 +41,25 @@ class ScriptManager {
   }
 
   /**
-   * Performs hardcoded initial script injection for the app. Wraps `load()` method.
+   * Performs hardcoded initial scripts injection for the app. Wraps `load()` method.
    *
    * @memberof ScriptManager
    */
   preconfigure() {
     // array of scripts' URLs relative to index.html
     let scripts = [
-      "./core/js/classes/utility/ProtectedArray.js",
-      "./core/js/classes/business/Schedule.js",
-      "./js/expandCollapseInit.js",
-      "./js/expandCollapseFinish.js",
-      "./js/childrenAutoCollapse.js",
-      "./js/checkboxEnabler.js",
-      "./js/inputDatesTodayInjector.js",
-      "./js/appendElementFromTemplate.js",
-      "./js/updateRoutineName.js",
-      "./js/EventManager.js",
-      "./js/main.js",
+      "core/js/classes/utility/SecuredArray.js",
+      "core/js/classes/business/ScheduleFactory.js",
+      "core/js/classes/business/Schedule.js",
+      "js/expandCollapseInit.js",
+      "js/expandCollapseFinish.js",
+      "js/childrenAutoCollapse.js",
+      "js/checkboxEnabler.js",
+      "js/inputDatesTodayInjector.js",
+      "js/appendElementFromTemplate.js",
+      "js/updateRoutineName.js",
+      "js/EventManager.js",
+      "js/main.js",
     ];
     this.load("body", scripts, "append");
   }
