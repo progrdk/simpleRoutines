@@ -1,14 +1,13 @@
 /**
- * Singleton factory class for Schedules.
- *  Holds a list of Schedules. Returns the existing one
- *  or creates a new and adds it to the list.
+ * Singleton factory class for Schedules.<br>
+ *  Holds a list of Schedules.<br>
+ *  Returns the existing one
+ *    or creates a new and adds it to the list.
  *
- * @class ScheduleFactory
  */
 class ScheduleFactory {
   /**
    * Implements the Singleton pattern.
-   * @memberof ScheduleFactory
    */
   constructor() {
     if (!ScheduleFactory._INSTANCE) {

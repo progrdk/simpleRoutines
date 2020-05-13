@@ -80,7 +80,7 @@ body {
 }
 
 .collapsable .collapsable-header::after {
-  content: url("../sources/icons/chevron-down.svg");
+  content: url("../../content/icons/chevron-down.svg");
   display: inline-block;
   height: 24px;
   width: 24px;
@@ -90,7 +90,7 @@ body {
 }
 
 .collapsable.expanded .collapsable-header::after {
-  content: url("../sources/icons/chevron-up.svg");
+  content: url("../../content/icons/chevron-up.svg");
 }
 
 /* Animate chevron icon on expand & collapse  */
@@ -120,7 +120,7 @@ body {
 .collapsable .caption > .btn {
   width: 2rem;
   height: 2rem;
-  background-image: url(../sources/icons/check.svg);
+  background-image: url(../../content/icons/check.svg);
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -151,7 +151,7 @@ body {
 }
 
 .button-add::after {
-  content: url("../sources/icons/plus.svg");
+  content: url("../../content/icons/plus.svg");
   display: inline-block;
   margin-top: 0.8vh;
 }
@@ -190,13 +190,13 @@ body {
 }
 
 .skip-back {
-  background-image: url(../sources/icons/skip-back.svg);
+  background-image: url(../../content/icons/skip-back.svg);
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .skip-forward {
-  background-image: url(../sources/icons/skip-forward.svg);
+  background-image: url(../../content/icons/skip-forward.svg);
   background-repeat: no-repeat;
   background-position: center;
 }

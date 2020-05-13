@@ -48,18 +48,18 @@ class ScriptManager {
   preconfigure() {
     // array of scripts' URLs relative to index.html
     let scripts = [
-      "core/js/classes/utility/SecuredArray.js",
-      "core/js/classes/business/ScheduleFactory.js",
-      "core/js/classes/business/Schedule.js",
-      "js/expandCollapseInit.js",
-      "js/expandCollapseFinish.js",
-      "js/childrenAutoCollapse.js",
-      "js/checkboxEnabler.js",
-      "js/inputDatesTodayInjector.js",
-      "js/appendElementFromTemplate.js",
-      "js/updateRoutineName.js",
-      "js/EventManager.js",
-      "js/main.js",
+      "src/core/js/classes/utility/SecuredArray.js",
+      "src/core/js/classes/business/ScheduleFactory.js",
+      "src/core/js/classes/business/Schedule.js",
+      "src/js/expandCollapseInit.js",
+      "src/js/expandCollapseFinish.js",
+      "src/js/childrenAutoCollapse.js",
+      "src/js/checkboxEnabler.js",
+      "src/js/inputDatesTodayInjector.js",
+      "src/js/appendElementFromTemplate.js",
+      "src/js/updateRoutineName.js",
+      "src/js/EventManager.js",
+      "src/js/main.js",
     ];
     this.load("body", scripts, "append");
   }

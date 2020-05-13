@@ -4,7 +4,8 @@
   "description": "SPA for easy and simple routines tracking and execution.",
   "main": "main.js",
   "scripts": {
-    "test": "testSR"
+    "test": "testSR",
+    "jsdoc": "jsdoc -c jsdoc.json"
   },
   "repository": {
     "type": "git",
@@ -29,5 +30,8 @@
     "bootstrap": "^4.5.0",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.6.4"
   }
 }
