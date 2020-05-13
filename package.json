@@ -1,0 +1,33 @@
+{
+  "name": "simpleroutines",
+  "version": "1.0.0-aplha.0",
+  "description": "SPA for easy and simple routines tracking and execution.",
+  "main": "main.js",
+  "scripts": {
+    "test": "testSR"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/progrdk/simpleRoutines.git"
+  },
+  "keywords": [
+    "spa",
+    "timeManagement",
+    "taskManagement",
+    "assistant",
+    "routines",
+    "repeated",
+    "repeatedactions"
+  ],
+  "author": "progr.dk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/progrdk/simpleRoutines/issues"
+  },
+  "homepage": "https://github.com/progrdk/simpleRoutines#readme",
+  "dependencies": {
+    "bootstrap": "^4.5.0",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1"
+  }
+}
