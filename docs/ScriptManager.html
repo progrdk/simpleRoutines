@@ -28,7 +28,10 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>ScriptManager<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>ScriptManager<span class="signature">(urls<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>Class for dynamic load and injection of JS script(s).<br>
+Holds a configuration set of initial app's scripts, arranged in load order.</p></div>
         
     
 </header>
@@ -39,21 +42,14 @@
         
 
     
-
-    
-    <h4 class="name" id="ScriptManager"><span class="type-signature"></span>new ScriptManager<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h2>Constructor</h2>
     
 
     
+    <h4 class="name" id="ScriptManager"><span class="type-signature"></span>new ScriptManager<span class="signature">(urls<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    
 
-
-
-<div class="description">
-    <p>Class for JS scripts dynamic loading.
-Has methods for loading one script or many ordered scripts.
-Also holds app's initial scripts load order configuration and method to perform scripts injection on a page construction time.</p>
-<p>Is meant to be included in mainpage head.</p>
-</div>
+    
 
 
 
@@ -61,6 +57,70 @@ Also holds app's initial scripts load order configuration and method to perform 
 
 
 
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>urls</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Set.&lt;string></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>List of URLs of initial JS scripts to be injected to the end of the documents's body.<br>
+For the default value used if parameter is omitted, refer to <a href="ScriptManager.html#initialScripts"><code>initialScripts</code></a>.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -96,7 +156,7 @@ Also holds app's initial scripts load order configuration and method to perform 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="utility_ScriptManager.js.html">utility/ScriptManager.js</a>, <a href="utility_ScriptManager.js.html#line1">line 1</a>
+        <a href="utility_ScriptManager.js.html">utility/ScriptManager.js</a>, <a href="utility_ScriptManager.js.html#line16">line 16</a>
     </li></ul></dd>
     
 
@@ -142,39 +202,26 @@ Also holds app's initial scripts load order configuration and method to perform 
     
 
     
-
-    
-        <h3 class="subsection-title">Methods</h3>
+        <h3 class="subsection-title">Members</h3>
 
         
             
+<h4 class="name" id="initialScripts"><span class="type-signature"></span>initialScripts<span class="type-signature"></span></h4>
+
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
 
     
 
-    
-    <h4 class="name" id="_serviceLoad"><span class="type-signature"></span>_serviceLoad<span class="signature">(selector, url, position)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Private service method. Removes code duplication. Do not call or modify on its own outside the class!</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
+<table class="props">
     <thead>
     <tr>
         
@@ -196,13 +243,13 @@ Also holds app's initial scripts load order configuration and method to perform 
 
         <tr>
             
-                <td class="name"><code>selector</code></td>
+                <td class="name"><code>initialScripts</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">Set.&lt;string></span>
 
 
             
@@ -212,63 +259,30 @@ Also holds app's initial scripts load order configuration and method to perform 
 
             
 
-            <td class="description last"><p>Refer <code>ScriptManager.load()</code> docs.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>url</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-|
-
-<span class="param-type">Array.&lt;string></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Refer <code>ScriptManager.load()</code> docs.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>position</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Refer <code>ScriptManager.load()</code> docs.</p></td>
+            <td class="description last"><p><em>Read-only</em> configuration property
+that holds a list of JS scripts to be injected
+into a document on the construction time.<br>
+Can be populated via <a href="ScriptManager.html"><code>constructor</code></a> only.<br>
+Scripts' URLs must be relative to the document they are injected to.<br>
+Default value contains the following (order preserved):</p>
+<pre class="prettyprint source lang-javascript"><code>&quot;src/core/js/classes/utility/SecuredArray.js&quot;,
+&quot;src/core/js/classes/business/ScheduleFactory.js&quot;,
+&quot;src/core/js/classes/business/Schedule.js&quot;,
+&quot;src/js/expandCollapseInit.js&quot;,
+&quot;src/js/expandCollapseFinish.js&quot;,
+&quot;src/js/childrenAutoCollapse.js&quot;,
+&quot;src/js/checkboxEnabler.js&quot;,
+&quot;src/js/inputDatesTodayInjector.js&quot;,
+&quot;src/js/appendElementFromTemplate.js&quot;,
+&quot;src/js/updateRoutineName.js&quot;,
+&quot;src/js/EventManager.js&quot;,
+&quot;src/js/main.js&quot;
+</code></pre></td>
         </tr>
 
     
     </tbody>
 </table>
-
-
 
 
 
@@ -302,7 +316,7 @@ Also holds app's initial scripts load order configuration and method to perform 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="utility_ScriptManager.js.html">utility/ScriptManager.js</a>, <a href="utility_ScriptManager.js.html#line75">line 75</a>
+        <a href="utility_ScriptManager.js.html">utility/ScriptManager.js</a>, <a href="utility_ScriptManager.js.html#line87">line 87</a>
     </li></ul></dd>
     
 
@@ -318,19 +332,11 @@ Also holds app's initial scripts load order configuration and method to perform 
 
 
 
+        
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
+    
+        <h3 class="subsection-title">Methods</h3>
 
         
             
@@ -346,9 +352,9 @@ Also holds app's initial scripts load order configuration and method to perform 
 
 
 <div class="description">
-    <p>Implements dynamic script loading into DOM.
-Accepts one URL as well as many ordered URLs.
-Wraps default methods ParentNode.append(), prepend() and ChildNode.before(), after(). Refer to MDN Docs on this methods.</p>
+    <p>Performs dynamic script(s) injection into
+the DOM of a document (file) it's being called at.
+Accepts one URL as well as many ordered URLs in Set.</p>
 </div>
 
 
@@ -416,7 +422,8 @@ Wraps default methods ParentNode.append(), prepend() and ChildNode.before(), aft
                 </td>
             
 
-            <td class="description last"><p>Valid CSS selector of a parent / sibling element.</p></td>
+            <td class="description last"><p>Valid CSS selector
+of a parent / sibling DOM element.</p></td>
         </tr>
 
     
@@ -432,7 +439,7 @@ Wraps default methods ParentNode.append(), prepend() and ChildNode.before(), aft
 <span class="param-type">string</span>
 |
 
-<span class="param-type">Array.&lt;string></span>
+<span class="param-type">Set.&lt;string></span>
 
 
             
@@ -454,7 +461,9 @@ Wraps default methods ParentNode.append(), prepend() and ChildNode.before(), aft
                 </td>
             
 
-            <td class="description last"><p>One or many ordered URL(s) relative to the element, identified by <code>selector</code>. URL(s) must start with &quot;./&quot; due to path resolving.</p></td>
+            <td class="description last"><p>One or many URLs
+(arranged in the load order),
+relative to the document, that method is being called at.</p></td>
         </tr>
 
     
@@ -493,12 +502,12 @@ Wraps default methods ParentNode.append(), prepend() and ChildNode.before(), aft
                 </td>
             
 
-            <td class="description last"><p>Switch that specifies the position where script(s) will be injected. Is enumerable of values:</p>
+            <td class="description last"><p>Switch that specifies the position where script(s) will be injected. May be any of these values:</p>
 <ul>
-<li><code>&quot;append&quot;</code> Default value. Scripts will be appended to the childlist of the element, identified by <code>selector</code>;</li>
-<li><code>&quot;prepent&quot;</code>  Scripts will be prepended to the childlist of the element, identified by <code>selector</code>;</li>
-<li><code>&quot;before&quot;</code> Scripts will be injected to the <em>parent</em> of the element, identified by <code>selector</code>, right before the element itself;</li>
-<li><code>&quot;after&quot;</code>  Scripts will be injected to the <em>parent</em> of the element, identified by <code>selector</code>, right after the element itself;</li>
+<li><strong><code>append</code></strong> - <strong><em>Default</em></strong> value. Script(s) will be appended to the childlist of the element, identified by <code>selector</code>.<br><a href="https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append">MDN: ParentNode.append()</a>;</li>
+<li><strong><code>prepend</code></strong> - Scripts will be prepended to the childlist of the element, identified by <code>selector</code>.<br><a href="https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend">MDN: ParentNode.append()</a>;</li>
+<li><strong><code>before</code></strong> - Scripts will be injected to the <em>parent</em> of the element, identified by <code>selector</code>, right before the element itself.<br><a href="https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/before">MDN: ChildNode.before()</a>;</li>
+<li><strong><code>after</code></strong>  - Scripts will be injected to the <em>parent</em> of the element, identified by <code>selector</code>, right after the element itself.<br><a href="https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/after">MDN: ChildNode.after()</a>;</li>
 </ul></td>
         </tr>
 
@@ -540,7 +549,7 @@ Wraps default methods ParentNode.append(), prepend() and ChildNode.before(), aft
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="utility_ScriptManager.js.html">utility/ScriptManager.js</a>, <a href="utility_ScriptManager.js.html#line25">line 25</a>
+        <a href="utility_ScriptManager.js.html">utility/ScriptManager.js</a>, <a href="utility_ScriptManager.js.html#line106">line 106</a>
     </li></ul></dd>
     
 
@@ -584,7 +593,11 @@ Wraps default methods ParentNode.append(), prepend() and ChildNode.before(), aft
 
 
 <div class="description">
-    <p>Performs hardcoded initial scripts injection for the app. Wraps <code>load()</code> method.</p>
+    <p>Performs initial JS scripts (taken from
+<a href="ScriptManager.html#initialScripts"><code>initialScripts</code></a> property)
+injection into the html page (file) it's being called at.<br>
+Scripts are placed at the end of the <code>&lt;body&gt;</code> tag (appended).<br>
+Wraps <a href="ScriptManager.html#load"><code>load()</code></a> method.</p>
 </div>
 
 
@@ -628,7 +641,7 @@ Wraps default methods ParentNode.append(), prepend() and ChildNode.before(), aft
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="utility_ScriptManager.js.html">utility/ScriptManager.js</a>, <a href="utility_ScriptManager.js.html#line48">line 48</a>
+        <a href="utility_ScriptManager.js.html">utility/ScriptManager.js</a>, <a href="utility_ScriptManager.js.html#line140">line 140</a>
     </li></ul></dd>
     
 
@@ -680,7 +693,7 @@ Wraps default methods ParentNode.append(), prepend() and ChildNode.before(), aft
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Wed May 13 2020 19:13:51 GMT+0300 (GMT+03:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu May 14 2020 18:35:20 GMT+0300 (GMT+03:00)
 </footer>
 
 <script> prettyPrint(); </script>

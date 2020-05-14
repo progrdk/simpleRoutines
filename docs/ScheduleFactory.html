@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>ScheduleFactory<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>ScheduleFactory</h2>
         
             <div class="class-description"><p>Singleton factory class for Schedules.<br>
 Holds a list of Schedules.<br>
@@ -43,21 +43,7 @@ or creates a new and adds it to the list.</p></div>
     
         
 
-    
-    <h2>Constructor</h2>
-    
 
-    
-    <h4 class="name" id="ScheduleFactory"><span class="type-signature"></span>new ScheduleFactory<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Implements the Singleton pattern.</p>
-</div>
 
 
 
@@ -100,7 +86,7 @@ or creates a new and adds it to the list.</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="business_ScheduleFactory.js.html">business/ScheduleFactory.js</a>, <a href="business_ScheduleFactory.js.html#line12">line 12</a>
+        <a href="business_ScheduleFactory.js.html">business/ScheduleFactory.js</a>, <a href="business_ScheduleFactory.js.html#line13">line 13</a>
     </li></ul></dd>
     
 
@@ -146,6 +132,120 @@ or creates a new and adds it to the list.</p></div>
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="schedules"><span class="type-signature"></span>schedules<span class="type-signature"></span></h4>
+
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>schedules</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Set.&lt;<a href="Schedule.html">Schedule</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A list of the Schedule objects.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="business_ScheduleFactory.js.html">business/ScheduleFactory.js</a>, <a href="business_ScheduleFactory.js.html#line30">line 30</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -164,8 +264,8 @@ or creates a new and adds it to the list.</p></div>
 
 
 <div class="description">
-    <p>Returns the ScheduleFactory single instance.</p>
-<p>Either creates a new instance if none, or returns the existing one.</p>
+    <p>Returns the ScheduleFactory single instance.<br>
+Either creates a new instance if none, or returns the existing one.</p>
 </div>
 
 
@@ -209,7 +309,7 @@ or creates a new and adds it to the list.</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="business_ScheduleFactory.js.html">business/ScheduleFactory.js</a>, <a href="business_ScheduleFactory.js.html#line39">line 39</a>
+        <a href="business_ScheduleFactory.js.html">business/ScheduleFactory.js</a>, <a href="business_ScheduleFactory.js.html#line55">line 55</a>
     </li></ul></dd>
     
 
@@ -275,8 +375,8 @@ or creates a new and adds it to the list.</p></div>
 
 
 <div class="description">
-    <p>Returns the Schedule object, identified by an array of its properties.</p>
-<p>Either creates a <em>new</em> Schedule object and adds it to the list,
+    <p>Identifies the Schedule object in the list by an array of its properties.<br>
+Either creates a <em>new</em> Schedule object and adds it to the list,
 or takes the <em>existing</em> one from the list.</p>
 </div>
 
@@ -330,8 +430,15 @@ or takes the <em>existing</em> one from the list.</p>
             
 
             <td class="description last"><p>Array of numbers that correspond to the
-Schedule - to be found or created - properties.
-Order matters : <code>[ timesPerMonth,                         timesPerWeek,                         intervalDays,                         intervalWeeks,                         intervalMonths, ]</code>.</p></td>
+Schedule - to be found or created - properties.<br>
+Order matters :</p>
+<ul>
+<li>timesPerMonth,</li>
+<li>timesPerWeek,</li>
+<li>intervalDays,</li>
+<li>intervalWeeks,</li>
+<li>intervalMonths.</li>
+</ul></td>
         </tr>
 
     
@@ -372,7 +479,7 @@ Order matters : <code>[ timesPerMonth,                         timesPerWeek,    
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="business_ScheduleFactory.js.html">business/ScheduleFactory.js</a>, <a href="business_ScheduleFactory.js.html#line62">line 62</a>
+        <a href="business_ScheduleFactory.js.html">business/ScheduleFactory.js</a>, <a href="business_ScheduleFactory.js.html#line79">line 79</a>
     </li></ul></dd>
     
 
@@ -446,7 +553,7 @@ Order matters : <code>[ timesPerMonth,                         timesPerWeek,    
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Wed May 13 2020 19:13:51 GMT+0300 (GMT+03:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu May 14 2020 18:35:20 GMT+0300 (GMT+03:00)
 </footer>
 
 <script> prettyPrint(); </script>

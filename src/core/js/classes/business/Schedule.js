@@ -1,26 +1,25 @@
 /**
- * Class describes a Schedule entity.
- *
- * `Schedule` encapsulates data and methods that correspond to
+ * Encapsulates data and methods that correspond to
  * Routine repetition beyond day limits.
- *
- * @class Schedule
  */
 class Schedule {
+  /**
+   * 
+   */
   constructor() {
-    // create clear (from inheritance) object for descriptor
-    let descriptor = Object.create(null);
-    descriptor.writable = true;
-    descriptor.enumerable = true;
-    descriptor.configurable = false;
+    // create descriptor
+    let desc = Object.create(null);
+    desc.writable = true;
+    desc.enumerable = true;
+    desc.configurable = false;
     // create public properties (for getters/setters)
     //  that follow project-wide naming convention
-    Object.defineProperty(this, "__timesPerMonth", descriptor);
-    Object.defineProperty(this, "__timesPerWeek", descriptor);
-    Object.defineProperty(this, "__intervalDays", descriptor);
-    Object.defineProperty(this, "__intervalWeeks", descriptor);
-    Object.defineProperty(this, "__intervalMonths", descriptor);
-    Object.defineProperty(this, "__routines", descriptor);
+    Object.defineProperty(this, "__timesPerMonth", desc);
+    Object.defineProperty(this, "__timesPerWeek", desc);
+    Object.defineProperty(this, "__intervalDays", desc);
+    Object.defineProperty(this, "__intervalWeeks", desc);
+    Object.defineProperty(this, "__intervalMonths", desc);
+    Object.defineProperty(this, "__routines", desc);
     // initialize routines with an empty secured array
     this.__routines = new SecuredArray();
   }

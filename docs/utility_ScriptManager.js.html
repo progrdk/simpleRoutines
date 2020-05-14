@@ -27,41 +27,129 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Class for JS scripts dynamic loading.
- * Has methods for loading one script or many ordered scripts.
- * Also holds app's initial scripts load order configuration and method to perform scripts injection on a page construction time.
+ * @file Performs initial JS scripts injection on a document construction time.
  *
- * Is meant to be included in mainpage head.
- *
- * @class ScriptManager
+ * **Is meant to be included in starting page `&lt;head>`.**
+ */
+
+/**
+ * Class for dynamic load and injection of JS script(s).&lt;br>
+ * Holds a configuration set of initial app's scripts, arranged in load order.
  */
 class ScriptManager {
   /**
-   * Implements dynamic script loading into DOM.
-   * Accepts one URL as well as many ordered URLs.
-   * Wraps default methods ParentNode.append(), prepend() and ChildNode.before(), after(). Refer to MDN Docs on this methods.
+   * @param {Set&lt;string>} [urls] List of URLs of initial JS scripts to be injected to the end of the documents's body.&lt;br>
+   * For the default value used if parameter is omitted, refer to {@link ScriptManager#initialScripts|initialScripts}.
+   */
+  constructor(urls) {
+    // called empty => initializing default
+    if (!urls) {
+      // scripts' URLs must be relative to the page they are injected to
+      this.initialScripts = new Set([
+        "src/core/js/classes/utility/SecuredArray.js",
+        "src/core/js/classes/business/ScheduleFactory.js",
+        "src/core/js/classes/business/Schedule.js",
+        "src/js/expandCollapseInit.js",
+        "src/js/expandCollapseFinish.js",
+        "src/js/childrenAutoCollapse.js",
+        "src/js/checkboxEnabler.js",
+        "src/js/inputDatesTodayInjector.js",
+        "src/js/appendElementFromTemplate.js",
+        "src/js/updateRoutineName.js",
+        "src/js/EventManager.js",
+        "src/js/main.js",
+      ]);
+    }
+    // passed a valid parameter of Set&lt;string> type
+    else if (
+      urls instanceof Set &amp;&amp;
+      Array.from(urls.entries()).every((v) => typeof v === "string")
+    ) {
+      this.initialScripts = urls;
+    }
+    // passed an invalid parameter
+    else {
+      throw new SyntaxError(
+        "ScriptManager constructor accepts a single parameter of Set&lt;string> only."
+      );
+    }
+
+    /* Some questionable paranoic mutation protection */
+    // create read-only descriptor
+    let descSec = Object.create(null);
+    descSec.writable = false;
+    descSec.enumerable = true;
+    descSec.configurable = false;
+    // extend r/o descriptor and make !enumerable
+    let descSecPriv = Object.create(descSec);
+    descSecPriv.enumerable = false;
+    // protect
+    Object.defineProperty(this, "initialScripts", descSec);
+    Object.defineProperty(ScriptManager.prototype, "load", descSec);
+    Object.defineProperty(ScriptManager.prototype, "preconfigure", descSec);
+    Object.defineProperty(ScriptManager.prototype, "_serviceLoad", descSecPriv);
+  }
+
+  /**
+   * @property {Set&lt;string>} initialScripts _Read-only_ configuration property
+   *  that holds a list of JS scripts to be injected
+   *  into a document on the construction time.&lt;br>
+   * Can be populated via {@link ScriptManager|constructor} only.&lt;br>
+   * Scripts' URLs must be relative to the document they are injected to.&lt;br>
+   * Default value contains the following (order preserved):
+   * ```javascript
+   * "src/core/js/classes/utility/SecuredArray.js",
+   * "src/core/js/classes/business/ScheduleFactory.js",
+   * "src/core/js/classes/business/Schedule.js",
+   * "src/js/expandCollapseInit.js",
+   * "src/js/expandCollapseFinish.js",
+   * "src/js/childrenAutoCollapse.js",
+   * "src/js/checkboxEnabler.js",
+   * "src/js/inputDatesTodayInjector.js",
+   * "src/js/appendElementFromTemplate.js",
+   * "src/js/updateRoutineName.js",
+   * "src/js/EventManager.js",
+   * "src/js/main.js"
+   * ```
+   */
+  initialScripts;
+
+  /**
+   * Performs dynamic script(s) injection into
+   *  the DOM of a document (file) it's being called at.
+   * Accepts one URL as well as many ordered URLs in Set.
    *
-   * @param {string} selector Valid CSS selector of a parent / sibling element.
-   * @param {string|Array&lt;string>} url One or many ordered URL(s) relative to the element, identified by `selector`. URL(s) must start with "./" due to path resolving.
-   * @param {string} [position="append"] Switch that specifies the position where script(s) will be injected. Is enumerable of values:
-   * - `"append"` Default value. Scripts will be appended to the childlist of the element, identified by `selector`;
-   * - `"prepent"`  Scripts will be prepended to the childlist of the element, identified by `selector`;
-   * - `"before"` Scripts will be injected to the _parent_ of the element, identified by `selector`, right before the element itself;
-   * - `"after"`  Scripts will be injected to the _parent_ of the element, identified by `selector`, right after the element itself;
+   * @param {string} selector Valid CSS selector
+   *  of a parent / sibling DOM element.
+   * @param {string|Set&lt;string>} url One or many URLs
+   *  (arranged in the load order),
+   *  relative to the document, that method is being called at.
+   * @param {string} [position="append"] Switch that specifies the position where script(s) will be injected. May be any of these values:
+   * - **`append`** - **_Default_** value. Script(s) will be appended to the childlist of the element, identified by `selector`.&lt;br>{@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append|MDN: ParentNode.append()};
+   * - **`prepend`** - Scripts will be prepended to the childlist of the element, identified by `selector`.&lt;br>{@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend|MDN: ParentNode.append()};
+   * - **`before`** - Scripts will be injected to the _parent_ of the element, identified by `selector`, right before the element itself.&lt;br>{@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/before|MDN: ChildNode.before()};
+   * - **`after`**  - Scripts will be injected to the _parent_ of the element, identified by `selector`, right after the element itself.&lt;br>{@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/after|MDN: ChildNode.after()};
    * @memberof ScriptManager
    */
   load(selector, url, position = "append") {
     switch (typeof url) {
       case "string": {
-        // select the existing script
+        // load the single script
         this._serviceLoad(selector, url, position);
         break;
       }
       case "object": {
-        if (Array.isArray(url) &amp;&amp; url.every((v) => typeof v === "string")) {
+        // check that a Set&lt;string> is passed
+        if (
+          url instanceof Set &amp;&amp;
+          Array.from(url.values()).every((v) => typeof v === "string")
+        ) {
+          // load every script in the array, preserving the order
           url.forEach((v) => this._serviceLoad(selector, v, position));
         } else {
-          throw new SyntaxError("URL array supplied has non-string values.");
+          throw new SyntaxError(
+            "The second parameter accepts only a string or a Set&lt;string> value."
+          );
         }
         break;
       }
@@ -69,47 +157,39 @@ class ScriptManager {
   }
 
   /**
-   * Performs hardcoded initial scripts injection for the app. Wraps `load()` method.
+   * Performs initial JS scripts (taken from
+   *  {@link ScriptManager#initialScripts|initialScripts} property)
+   *  injection into the html page (file) it's being called at.&lt;br>
+   * Scripts are placed at the end of the `&lt;body>` tag (appended).&lt;br>
+   * Wraps {@link ScriptManager#load|load()} method.
    *
    * @memberof ScriptManager
    */
   preconfigure() {
-    // array of scripts' URLs relative to index.html
-    let scripts = [
-      "src/core/js/classes/utility/SecuredArray.js",
-      "src/core/js/classes/business/ScheduleFactory.js",
-      "src/core/js/classes/business/Schedule.js",
-      "src/js/expandCollapseInit.js",
-      "src/js/expandCollapseFinish.js",
-      "src/js/childrenAutoCollapse.js",
-      "src/js/checkboxEnabler.js",
-      "src/js/inputDatesTodayInjector.js",
-      "src/js/appendElementFromTemplate.js",
-      "src/js/updateRoutineName.js",
-      "src/js/EventManager.js",
-      "src/js/main.js",
-    ];
-    this.load("body", scripts, "append");
+    this.load("body", this.initialScripts, "append");
   }
 
   /**
-   * Private service method. Removes code duplication. Do not call or modify on its own outside the class!
+   * Private service method.
+   * Removes code duplication.
+   * Should not be called or modified on its own outside the class!
    *
    * @param {string} selector Refer `ScriptManager.load()` docs.
    * @param {string|Array&lt;string>} url Refer `ScriptManager.load()` docs.
    * @param {string} position Refer `ScriptManager.load()` docs.
    * @memberof ScriptManager
+   * @private
    */
   _serviceLoad(selector, url, position) {
     // find the Element
     let element = document.querySelector(selector);
-    // create a new script node
+    // create a new &lt;script> node
     let script = document.createElement("script");
     // set its src to the provided URL
     script.src = url;
-    // queue scripts to execute in injection order
+    // queue script to execute in injection order
     script.async = false;
-    // add it into DOM
+    // add it into the DOM
     switch (position) {
       case "before": {
         element.before(script);
@@ -131,6 +211,8 @@ class ScriptManager {
   }
 }
 
+// TODO: consider moving following code into smth like init.js file
+//  placed after the ScriptManager.js
 /* This code must remain in place! */
 /* Perform initial JS injection on DOM load. */
 const SCRIPT_MANAGER = new ScriptManager();
@@ -154,7 +236,7 @@ document.addEventListener(
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Wed May 13 2020 19:13:51 GMT+0300 (GMT+03:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu May 14 2020 18:35:20 GMT+0300 (GMT+03:00)
 </footer>
 
 <script> prettyPrint(); </script>
