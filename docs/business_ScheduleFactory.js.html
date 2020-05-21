@@ -44,34 +44,41 @@ class ScheduleFactory {
       throw new Error("Can't create multiple instances of a singleton class.");
     }
 
-    /**
-     * @property {ScheduleFactory} _INSTANCE The only instance of the ScheduleFactory singleton class.
-     * @memberof ScheduleFactory
-     * @static
-     * @private
-     */
+    this.schedules = new Set();
+    this[Symbol.toStringTag] = "ScheduleFactory";
     ScheduleFactory._INSTANCE = this;
 
-    /**
-     * @property {Set&lt;Schedule>} schedules A list of the Schedule objects.
-     */
-    this.schedules = new Set();
-
     /* Some questionable paranoic mutation protection */
+
     // descriptor against cloning (by Object.assign() and ...)
     let noClone = Object.create(null);
     noClone.enumerable = false;
     noClone.configurable = false;
+    // own properties protection
+    Object.defineProperty(this, "schedules", noClone);
+    // lock instance itself
+    Object.freeze(this);
+
     // descriptor against reassigning
     let noWrite = Object.create(null);
     noWrite.writable = false;
     noWrite.configurable = false;
-    // protection
-    Object.defineProperty(this, "schedules", noClone);
+    // static properties protection
     Object.defineProperty(ScheduleFactory, "_INSTANCE", noWrite);
-    // lock instance itself
-    Object.freeze(this);
   }
+
+  /**
+   * @property {ScheduleFactory} _INSTANCE The only instance of the ScheduleFactory singleton class.
+   * @memberof ScheduleFactory
+   * @static
+   * @private
+   */
+  static _INSTANCE;
+
+  /**
+   * @property {Set&lt;Schedule>} schedules A list of the Schedule objects.
+   */
+  schedules;
 
   /**
    * Returns the ScheduleFactory single instance.&lt;br>
@@ -88,76 +95,60 @@ class ScheduleFactory {
   }
 
   /**
-   * Identifies the Schedule object in the list by an array of its properties.&lt;br>
    * Either creates a _new_ Schedule object and adds it to the list,
    *  or takes the _existing_ one from the list.
+   * &lt;br>
+   * Identifies the Schedule object in the list by an array of its properties.
    *
-   * @param {Array&lt;number>} params Array of numbers that correspond to the
-   *  Schedule - to be found or created - properties.&lt;br>
-   * Order matters :
-   *  * timesPerMonth,
-   *  * timesPerWeek,
-   *  * intervalDays,
-   *  * intervalWeeks,
-   *  * intervalMonths.
-   *
+   * @param {number} tpm `Schedule.timesPerMonth` value
+   * @param {number} tpw `Schedule.timesPerWeek` value
+   * @param {number} intd `Schedule.intervalDays` value
+   * @param {number} intw `Schedule.intervalWeeks` value
+   * @param {number} intm `Schedule.intervalMonths` value
    * @returns {Schedule} Schedule object.
    * @memberof ScheduleFactory
    */
-  getSchedule(params) {
-    let error = new SyntaxError(
-      "Incorrect function parameter.\r\ngetSchedule() requires an Array of 5 numbers that correlates with Schedule properties.\r\nSupplied with : " +
-        typeof params +
-        "->" +
-        JSON.stringify(params)
-    );
-    // check that an array of exact lenth is supplied
-    if (!Array.isArray(params) || params.length !== 5) {
-      throw error;
-    }
+  getSchedule(tpm, tpw, intd, intw, intm) {
     // check that supplied params are all numbers that are not floats
     if (
       // parseFloat is used since parseInt cuts off the decimal part
-      !params.every((e) => typeof e === "number" &amp;&amp; parseFloat(e) % 1 === 0)
+      [tpm, tpw, intd, intw, intm].some(
+        (e) => typeof e !== "number" &amp;&amp; parseFloat(e) % 1 !== 0
+      )
     ) {
-      throw error;
+      throw new SyntaxError("Invalid argument. Expected 5 numbers.");
     }
-    // desctructing assignment
-    let [
-      timesPerMonth,
-      timesPerWeek,
-      intervalDays,
-      intervalWeeks,
-      intervalMonths,
-    ] = params;
-    let schedules = ScheduleFactory._INSTANCE.schedules;
     return (
       // either found the Schedule object
-      schedules.find((e) =>
-        e.timesPerMonth === timesPerMonth &amp;&amp;
-        e.timesPerWeek === timesPerWeek &amp;&amp;
-        e.intervalDays === intervalDays &amp;&amp;
-        e.intervalWeeks === intervalWeeks &amp;&amp;
-        e.intervalMonths === intervalMonths
-          ? true
-          : false
-      ) ||
+      getFromSet(this.schedules, tpm, tpw, intd, intw, intm) ||
       // or created a new one
-      createSchedule(
-        timesPerMonth,
-        timesPerWeek,
-        intervalDays,
-        intervalWeeks,
-        intervalMonths
-      )
+      createSchedule(tpm, tpw, intd, intw, intm)
     );
+
+    // locally scoped utility function for code readability
+    function getFromSet(set, tpm, tpw, intd, intw, intm) {
+      for (const v of set) {
+        if (
+          v.timesPerMonth === tpm &amp;&amp;
+          v.timesPerWeek === tpw &amp;&amp;
+          v.intervalDays === intd &amp;&amp;
+          v.intervalWeeks === intw &amp;&amp;
+          v.intervalMonths === intm
+        ) {
+          return v;
+        }
+      }
+      return null;
+    }
     // locally scoped utility function for code readability
     function createSchedule(tpm, tpw, intd, intw, intm) {
       let schedule = new Schedule(tpm, tpw, intd, intw, intm);
-      schedules.push(schedule);
+      ScheduleFactory._INSTANCE.schedules.add(schedule);
       return schedule;
     }
   }
+
+  // TODO: implement `deleteSchedule()` to remove Schedule from the list, letting it to be garbage collected.
 }
 </code></pre>
         </article>
@@ -169,13 +160,13 @@ class ScheduleFactory {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Schedule.html">Schedule</a></li><li><a href="ScheduleFactory.html">ScheduleFactory</a></li><li><a href="ScriptManager.html">ScriptManager</a></li><li><a href="SecuredArray.html">SecuredArray</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DevotedArray.html">DevotedArray</a></li><li><a href="Schedule.html">Schedule</a></li><li><a href="ScheduleFactory.html">ScheduleFactory</a></li><li><a href="ScriptManager.html">ScriptManager</a></li><li><a href="SetWrap.html">SetWrap</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu May 14 2020 18:35:20 GMT+0300 (GMT+03:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu May 21 2020 16:49:11 GMT+0300 (GMT+03:00)
 </footer>
 
 <script> prettyPrint(); </script>

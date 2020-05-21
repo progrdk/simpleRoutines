@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: utility/SetWrap.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: utility/SetWrap.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Wrapper class for JS core Set data structure that provides
+ *  additional functionality.
+ * @extends {Set}
+ */
+class SetWrap extends Set {
+  /**
+   * @hideconstructor
+   */
+  constructor(iterable) {
+    super(iterable);
+    // allow toStringTag write
+    Object.defineProperty(this, Symbol.toStringTag, {
+      writable: true,
+    });
+    this[Symbol.toStringTag] = "SetWrap"; //reassign
+    // forbid toStringTag write
+    Object.defineProperty(this, Symbol.toStringTag, {
+      writable: false,
+    });
+  }
+
+  /**
+   * Searches for the first match of an element, specified by parameters.
+   * @param {*} content
+   * - An object literal, containing keys and values,
+   *  used to match an element.
+   * - An array, containing values, used to match an element.
+   * - A primitive value, used to match an element.
+   *
+   * Only supplied content will be used throughout the search,
+   *  which may lead to multiple matches.&lt;br>
+   *  In this case, only the first match will be returned.
+   * @param {String} [constructorName=undefined] A name
+   *  of a class / constructor function
+   *  of an object being searched.&lt;br>
+   *  `undefined` value corresponds to primitives / object literals /
+   *  object without `toStringTag` specified (from outside the app namespace).
+   * @returns {*|null}
+   * - Element in Set that matched,
+   * - `Null` of no element matched.
+   * @throws {SyntaxError}
+   * - `content` is `undefined`.
+   * @throws {TypeError}
+   * - `content` is an empty object.
+   * - `content` is an empty array.
+   * - `content` is a `Null` primitive.
+   * @example setSelector({name "testRoutine", timesPerDay: 5}, "Routine")
+   * @example setSelector({prop1: true, prop2: []})
+   * @memberof SetWrap
+   */
+  setSelector(content, constructorName = undefined) {
+    /* Arguments checks */
+    if (content === undefined) {
+      throw new SyntaxError("Not all required parameters are supplied.");
+    }
+    if (content === null) {
+      throw new TypeError("Cannot utilize NULL primitives.");
+    }
+    if (Array.isArray(content) &amp;&amp; content.length === 0) {
+      throw new TypeError("Cannot utilize empty arrays.");
+    }
+    let dataType = "object"; //content type flag
+    if (
+      typeof content === "number" ||
+      typeof content === "string" ||
+      typeof content === "boolean" ||
+      typeof content === "bigint" ||
+      typeof content === "symbol"
+    ) {
+      dataType = "primitive"; //content is a primitive
+    } else if (Array.isArray(content)) {
+      dataType = "array"; //content is an array
+    }
+    if (
+      // content object with no names and no symbols supplied
+      dataType === "object" &amp;&amp;
+      Object.getOwnPropertyNames(content).length === 0 &amp;&amp;
+      Object.getOwnPropertySymbols(content).lengh === 0
+    ) {
+      throw new TypeError("Cannot utilize empty objects.");
+    }
+    /* Logics */
+    //loop through the entire Set instance
+    for (const el of this) {
+      // primitives
+      if (dataType === "primitive" &amp;&amp; el === content) {
+        return el; //primitive found in set
+      }
+      // arrays
+      else if (dataType === "array" &amp;&amp; content.every((v, i) => v === el[i])) {
+        return el; //array found in set
+      }
+      // objects
+      else if (
+        dataType === "object" &amp;&amp;
+        el[Symbol.toStringTag] === constructorName &amp;&amp;
+        validateObjIntersec(content, el)
+      ) {
+        return el; //object found in set
+      }
+    }
+    return null; //match not found in set
+
+    // validate objects intersection
+    function validateObjIntersec(subsetObj, setObj) {
+      // loop through entire subset object's keys
+      for (const k in subsetObj) {
+        if (subsetObj.hasOwnProperty(k)) {
+          // key is not present in set object, or values are not strictly equal
+          if (!setObj.hasOwnProperty(k) || setObj[k] !== subsetObj[k]) {
+            return false;
+          }
+        }
+      }
+      return true; // match!
+    }
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DevotedArray.html">DevotedArray</a></li><li><a href="Schedule.html">Schedule</a></li><li><a href="ScheduleFactory.html">ScheduleFactory</a></li><li><a href="ScriptManager.html">ScriptManager</a></li><li><a href="SetWrap.html">SetWrap</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu May 21 2020 16:49:11 GMT+0300 (GMT+03:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

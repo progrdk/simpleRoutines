@@ -16,9 +16,11 @@ class ScriptManager {
   constructor(urls) {
     // called empty => initializing default
     if (!urls) {
+      this[Symbol.toStringTag] = "ScriptManager";
       // scripts' URLs must be relative to the page they are injected to
       this.initialScripts = new Set([
-        "src/core/js/classes/utility/SecuredArray.js",
+        "src/core/js/classes/utility/SetWrap.js",
+        "src/core/js/classes/business/Routine.js",
         "src/core/js/classes/business/ScheduleFactory.js",
         "src/core/js/classes/business/Schedule.js",
         "src/js/expandCollapseInit.js",

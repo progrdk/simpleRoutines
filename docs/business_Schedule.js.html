@@ -32,9 +32,18 @@
  */
 class Schedule {
   /**
-   * 
+   *
    */
-  constructor() {
+  constructor(tpm, tpw, intd, intw, intm) {
+    // initialize properties via setters
+    this.timesPerMonth = tpm;
+    this.timesPerWeek = tpw;
+    this.intervalDays = intd;
+    this.intervalWeeks = intw;
+    this.intervalMonths = intm;
+    // initialize properties directly
+    this[Symbol.toStringTag] = "Schedule";
+    this.__routines = new SetWrap();
     // create descriptor
     let desc = Object.create(null);
     desc.writable = true;
@@ -48,54 +57,198 @@ class Schedule {
     Object.defineProperty(this, "__intervalWeeks", desc);
     Object.defineProperty(this, "__intervalMonths", desc);
     Object.defineProperty(this, "__routines", desc);
-    // initialize routines with an empty secured array
-    this.__routines = new SecuredArray();
   }
 
+  /**
+   * @property {integer} Name Public field that holds
+   * @deprecated By project convention should not be accessed directly, but with use of the {@link Schedule#timesPerMonth|getter / setter} function.
+   */
+  __timesPerMonth;
+
+  /**
+   * @property {integer} Name Public field that holds
+   * @deprecated By project convention should not be accessed directly, but with use of the {@link Schedule#timesPerMonth|getter / setter} function.
+   */
+  __timesPerWeek;
+
+  /**
+   * @property {integer} Name Public field that holds
+   * @deprecated By project convention should not be accessed directly, but with use of the {@link Schedule#timesPerMonth|getter / setter} function.
+   */
+  __intervalDays;
+
+  /**
+   * @property {integer} Name Public field that holds
+   * @deprecated By project convention should not be accessed directly, but with use of the {@link Schedule#timesPerMonth|getter / setter} function.
+   */
+  __intervalWeeks;
+
+  /**
+   * @property {integer} Name Public field that holds
+   * @deprecated By project convention should not be accessed directly, but with use of the {@link Schedule#timesPerMonth|getter / setter} function.
+   */
+  __intervalMonths;
+
+  /**
+   * @property {integer} Name Public field that holds
+   * @deprecated By project convention should not be accessed directly, but with use of the {@link Schedule#timesPerMonth|getter / setter} function.
+   */
+  __routines;
+
   /* Prototype getters and setters */
+  /**
+   * @property {integer} timesPerMonth Public property that holds
+   *  a list of Routines attached to the Schedule.&lt;br>
+   *  Utilizes the `__routines` field by `routines()` get and set methods.
+   */
   get timesPerMonth() {
     return this.__timesPerMonth;
   }
+
   set timesPerMonth(v) {
-    // TODO: implement validation
+    // parseFloat is used since parseInt cuts off the decimal part
+    if (typeof v !== "number" &amp;&amp; parseFloat(v) % 1 !== 0) {
+      throw new SyntaxError(
+        "Invalid argument. timesPerMonth must be an integer number."
+      );
+    }
     this.__timesPerMonth = v;
   }
+
+  /**
+   * @property {} Name Public property that holds
+   *  a list of Routines attached to the Schedule.&lt;br>
+   *  Utilizes the `__routines` field by `routines()` get and set methods.
+   */
   get timesPerWeek() {
     return this.__timesPerWeek;
   }
+
   set timesPerWeek(v) {
-    // TODO: implement validation
+    // parseFloat is used since parseInt cuts off the decimal part
+    if (typeof v !== "number" &amp;&amp; parseFloat(v) % 1 !== 0) {
+      throw new SyntaxError(
+        "Invalid argument. timesPerWeek must be an integer number."
+      );
+    }
     this.__timesPerWeek = v;
   }
+
+  /**
+   * @property {} Name Public property that holds
+   *  a list of Routines attached to the Schedule.&lt;br>
+   *  Utilizes the `__routines` field by `routines()` get and set methods.
+   */
   get intervalDays() {
     return this.__intervalDays;
   }
+
   set intervalDays(v) {
-    // TODO: implement validation
+    // parseFloat is used since parseInt cuts off the decimal part
+    if (typeof v !== "number" &amp;&amp; parseFloat(v) % 1 !== 0) {
+      throw new SyntaxError(
+        "Invalid argument. intervalDays must be an integer number."
+      );
+    }
     this.__intervalDays = v;
   }
+
+  /**
+   * @property {} Name Public property that holds
+   *  a list of Routines attached to the Schedule.&lt;br>
+   *  Utilizes the `__routines` field by `routines()` get and set methods.
+   */
   get intervalWeeks() {
     return this.__intervalWeeks;
   }
+
   set intervalWeeks(v) {
-    // TODO: implement validation
+    // parseFloat is used since parseInt cuts off the decimal part
+    if (typeof v !== "number" &amp;&amp; parseFloat(v) % 1 !== 0) {
+      throw new SyntaxError(
+        "Invalid argument. intervalWeeks must be an integer number."
+      );
+    }
     this.__intervalWeeks = v;
   }
+
+  /**
+   * @property {} Name Public property that holds
+   *  a list of Routines attached to the Schedule.&lt;br>
+   *  Utilizes the `__routines` field by `routines()` get and set methods.
+   */
   get intervalMonths() {
     return this.__intervalMonths;
   }
+
   set intervalMonths(v) {
-    // TODO: implement validation
+    // parseFloat is used since parseInt cuts off the decimal part
+    if (typeof v !== "number" &amp;&amp; parseFloat(v) % 1 !== 0) {
+      throw new SyntaxError(
+        "Invalid argument. intervalMonths must be an integer number."
+      );
+    }
     this.__intervalMonths = v;
   }
+
+  /**
+   * @property {} Name Public property that holds
+   *  a list of Routines attached to the Schedule.&lt;br>
+   *  Utilizes the `__routines` field by `routines()` get and set methods.
+   */
   get routines() {
     return this.__routines;
   }
+
   set routines(v) {
     throw new TypeError("Routines property can't be reassigned.");
   }
 
-  // TODO: finish implementing the class.
+  /**
+   * Adds a Routine object to the list of attached routines
+   *  if there is no other Routine object with the same content
+   *  in the list already.
+   *
+   * @param {Routine} r Routine object to be attached to the schedule.
+   * @returns {true|false}
+   *  - _TRUE_ for the unique routine that was attached
+   *  - _FALSE_ for the routine, being a duplicate
+   *  (i.e., having a routine object with the same content
+   *  that has been attached already).
+   * @memberof Schedule
+   */
+  addRoutine(r) {
+    // ternary - Routine obj supplied AND it's not present in __routines
+    return r instanceof Routine &amp;&amp;
+      !getFromSet(
+        this.routines,
+        r.timesPerMonth,
+        r.timesPerWeek,
+        r.intervalDays,
+        r.intervalWeeks,
+        r.intervalMonths
+      )
+      ? !!this.routines.add(r) // true for unique inserts
+      : false; // false for duplicates
+
+    // locally scoped utility function for code readability
+    function getFromSet(set, tpm, tpw, intd, intw, intm) {
+      for (const v of set) { //loop through the entire set
+        if (
+          v.timesPerMonth === tpm &amp;&amp;
+          v.timesPerWeek === tpw &amp;&amp;
+          v.intervalDays === intd &amp;&amp;
+          v.intervalWeeks === intw &amp;&amp;
+          v.intervalMonths === intm
+        ) {
+          return v; //object found in set
+        }
+      }
+      return null; //object not found in set
+    }
+  }
+
+  removeRoutine(r) {}
 }
 </code></pre>
         </article>
@@ -107,13 +260,13 @@ class Schedule {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Schedule.html">Schedule</a></li><li><a href="ScheduleFactory.html">ScheduleFactory</a></li><li><a href="ScriptManager.html">ScriptManager</a></li><li><a href="SecuredArray.html">SecuredArray</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DevotedArray.html">DevotedArray</a></li><li><a href="Schedule.html">Schedule</a></li><li><a href="ScheduleFactory.html">ScheduleFactory</a></li><li><a href="ScriptManager.html">ScriptManager</a></li><li><a href="SetWrap.html">SetWrap</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu May 14 2020 18:35:20 GMT+0300 (GMT+03:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu May 21 2020 16:49:11 GMT+0300 (GMT+03:00)
 </footer>
 
 <script> prettyPrint(); </script>

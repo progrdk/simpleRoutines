@@ -228,7 +228,7 @@ or creates a new and adds it to the list.</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="business_ScheduleFactory.js.html">business/ScheduleFactory.js</a>, <a href="business_ScheduleFactory.js.html#line30">line 30</a>
+        <a href="business_ScheduleFactory.js.html">business/ScheduleFactory.js</a>, <a href="business_ScheduleFactory.js.html#line53">line 53</a>
     </li></ul></dd>
     
 
@@ -309,7 +309,7 @@ Either creates a new instance if none, or returns the existing one.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="business_ScheduleFactory.js.html">business/ScheduleFactory.js</a>, <a href="business_ScheduleFactory.js.html#line55">line 55</a>
+        <a href="business_ScheduleFactory.js.html">business/ScheduleFactory.js</a>, <a href="business_ScheduleFactory.js.html#line62">line 62</a>
     </li></ul></dd>
     
 
@@ -367,7 +367,7 @@ Either creates a new instance if none, or returns the existing one.</p>
     
 
     
-    <h4 class="name" id="getSchedule"><span class="type-signature"></span>getSchedule<span class="signature">(params)</span><span class="type-signature"> &rarr; {<a href="Schedule.html">Schedule</a>}</span></h4>
+    <h4 class="name" id="getSchedule"><span class="type-signature"></span>getSchedule<span class="signature">(tpm, tpw, intd, intw, intm)</span><span class="type-signature"> &rarr; {<a href="Schedule.html">Schedule</a>}</span></h4>
     
 
     
@@ -375,9 +375,10 @@ Either creates a new instance if none, or returns the existing one.</p>
 
 
 <div class="description">
-    <p>Identifies the Schedule object in the list by an array of its properties.<br>
-Either creates a <em>new</em> Schedule object and adds it to the list,
-or takes the <em>existing</em> one from the list.</p>
+    <p>Either creates a <em>new</em> Schedule object and adds it to the list,
+or takes the <em>existing</em> one from the list.
+<br>
+Identifies the Schedule object in the list by an array of its properties.</p>
 </div>
 
 
@@ -413,13 +414,13 @@ or takes the <em>existing</em> one from the list.</p>
 
         <tr>
             
-                <td class="name"><code>params</code></td>
+                <td class="name"><code>tpm</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;number></span>
+<span class="param-type">number</span>
 
 
             
@@ -429,16 +430,99 @@ or takes the <em>existing</em> one from the list.</p>
 
             
 
-            <td class="description last"><p>Array of numbers that correspond to the
-Schedule - to be found or created - properties.<br>
-Order matters :</p>
-<ul>
-<li>timesPerMonth,</li>
-<li>timesPerWeek,</li>
-<li>intervalDays,</li>
-<li>intervalWeeks,</li>
-<li>intervalMonths.</li>
-</ul></td>
+            <td class="description last"><p><code>Schedule.timesPerMonth</code> value</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>tpw</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p><code>Schedule.timesPerWeek</code> value</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>intd</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p><code>Schedule.intervalDays</code> value</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>intw</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p><code>Schedule.intervalWeeks</code> value</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>intm</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p><code>Schedule.intervalMonths</code> value</p></td>
         </tr>
 
     
@@ -479,7 +563,7 @@ Order matters :</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="business_ScheduleFactory.js.html">business/ScheduleFactory.js</a>, <a href="business_ScheduleFactory.js.html#line79">line 79</a>
+        <a href="business_ScheduleFactory.js.html">business/ScheduleFactory.js</a>, <a href="business_ScheduleFactory.js.html#line83">line 83</a>
     </li></ul></dd>
     
 
@@ -547,13 +631,13 @@ Order matters :</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Schedule.html">Schedule</a></li><li><a href="ScheduleFactory.html">ScheduleFactory</a></li><li><a href="ScriptManager.html">ScriptManager</a></li><li><a href="SecuredArray.html">SecuredArray</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DevotedArray.html">DevotedArray</a></li><li><a href="Schedule.html">Schedule</a></li><li><a href="ScheduleFactory.html">ScheduleFactory</a></li><li><a href="ScriptManager.html">ScriptManager</a></li><li><a href="SetWrap.html">SetWrap</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu May 14 2020 18:35:20 GMT+0300 (GMT+03:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu May 21 2020 16:49:11 GMT+0300 (GMT+03:00)
 </footer>
 
 <script> prettyPrint(); </script>
