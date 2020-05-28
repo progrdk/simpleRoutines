@@ -151,6 +151,309 @@ additional functionality.</p></div>
     
 
     
+    <h4 class="name" id="add"><span class="type-signature"></span>add<span class="signature">(value)</span><span class="type-signature"> &rarr; {<a href="SetWrap.html">SetWrap</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Wrapper for <code>Set.prototype.add()</code> method.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Value to be added to the Set.<br>
+Following data types are deprecated:</p>
+<ul>
+<li><code>null</code>,</li>
+<li><code>boolean</code>,</li>
+<li><code>array</code>, being empty,</li>
+<li><code>object</code>, being empty.</li>
+</ul></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utility_SetWrap.js.html">utility/SetWrap.js</a>, <a href="utility_SetWrap.js.html#line144">line 144</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+<ul>
+        <li>
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>&quot;Not all required parameters are supplied.&quot;</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">SyntaxError</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+</li>
+    
+        <li>
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>&quot;Cannot utilize NULL primitives.&quot;</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">TypeError</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+</li>
+    
+        <li>
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>&quot;Cannot utilize boolean primitives.&quot;</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">TypeError</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+</li>
+    
+        <li>
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>&quot;Cannot utilize empty arrays.&quot;</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">TypeError</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+</li>
+    
+        <li>
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>&quot;Cannot utilize empty objects.&quot;</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">TypeError</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+</li>
+    </ul>
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Mimicks the <em>super</em> method by allowing call chaining.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="SetWrap.html">SetWrap</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="setSelector"><span class="type-signature"></span>setSelector<span class="signature">(content, constructorName<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {*|null}</span></h4>
     
 
@@ -266,7 +569,7 @@ In this case, only the first match will be returned.</p></td>
 of a class / constructor function
 of an object being searched.<br>
 <code>undefined</code> value corresponds to primitives / object literals /
-object without <code>toStringTag</code> specified (from outside the app namespace).</p></td>
+objects without <code>toStringTag</code> specified (from outside the app namespace).</p></td>
         </tr>
 
     
@@ -456,7 +759,7 @@ object without <code>toStringTag</code> specified (from outside the app namespac
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu May 21 2020 16:49:11 GMT+0300 (GMT+03:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Fri May 22 2020 11:32:51 GMT+0300 (GMT+03:00)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -164,8 +164,8 @@ class Schedule {
   }
 
   /**
-   * @property {} Name Public property that holds
-   *  a list of Routines attached to the Schedule.<br>
+   * @property {SetWrap<Routine>} routines Public property that holds
+   *  a Set of Routines attached to the Schedule.<br>
    *  Utilizes the `__routines` field by `routines()` get and set methods.
    */
   get routines() {
@@ -192,20 +192,22 @@ class Schedule {
   addRoutine(r) {
     // ternary - Routine obj supplied AND it's not present in __routines
     return r instanceof Routine &&
-      !getFromSet(
-        this.routines,
-        r.timesPerMonth,
-        r.timesPerWeek,
-        r.intervalDays,
-        r.intervalWeeks,
-        r.intervalMonths
-      )
+      !this.routines.setSelector(
+        // FIXME: edit properties to correspond Routine object
+        {
+        timesPerMonth: r.timesPerMonth,
+        timesPerWeek: r.timesPerWeek,
+        intervalDays: r.intervalDays,
+        intervalWeeks: r.intervalWeeks,
+        intervalMonths: r.intervalMonths,
+      }, "Routine")
       ? !!this.routines.add(r) // true for unique inserts
       : false; // false for duplicates
 
     // locally scoped utility function for code readability
     function getFromSet(set, tpm, tpw, intd, intw, intm) {
-      for (const v of set) { //loop through the entire set
+      for (const v of set) {
+        //loop through the entire set
         if (
           v.timesPerMonth === tpm &&
           v.timesPerWeek === tpw &&

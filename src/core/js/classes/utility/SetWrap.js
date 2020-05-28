@@ -9,12 +9,12 @@ class SetWrap extends Set {
    */
   constructor(iterable) {
     super(iterable);
-    // allow toStringTag write
+    // allow write to toStringTag, defined in Set()
     Object.defineProperty(this, Symbol.toStringTag, {
       writable: true,
     });
     this[Symbol.toStringTag] = "SetWrap"; //reassign
-    // forbid toStringTag write
+    // forbid toStringTag write (default)
     Object.defineProperty(this, Symbol.toStringTag, {
       writable: false,
     });
@@ -126,20 +126,44 @@ class SetWrap extends Set {
     }
   }
 
+  /**
+   * Wrapper for `Set.prototype.add()` method.
+   * @param {*} value Value to be added to the Set.<br>
+   * Following data types are deprecated:
+   * - `null`,
+   * - `boolean`,
+   * - `array`, being empty,
+   * - `object`, being empty.
+   * @returns {SetWrap} Mimicks the _super_ method by allowing call chaining.
+   * @throws {SyntaxError} "Not all required parameters are supplied."
+   * @throws {TypeError} "Cannot utilize NULL primitives."
+   * @throws {TypeError} "Cannot utilize boolean primitives."
+   * @throws {TypeError} "Cannot utilize empty arrays."
+   * @throws {TypeError} "Cannot utilize empty objects."
+   */
   add(value) {
-    if (
+    /* Validations of arguments' edge cases */
+    if (value === undefined) {
+      throw new SyntaxError("Not all required parameters are supplied.");
+    } else if (value === null) {
+      throw new TypeError("Cannot utilize NULL primitives.");
+    } else if (typeof value === "boolean" || value instanceof Boolean) {
+      throw new TypeError("Cannot utilize boolean primitives.");
+    } else if (
+      (typeof value === "string" || value instanceof String) &&
+      value.length === 0
+    ) {
+      throw new TypeError("Cannot utilize empty strings.");
+    } else if (Array.isArray(value) && value.length === 0) {
+      throw new TypeError("Cannot utilize empty arrays.");
+    } else if (
       typeof value === "object" &&
       Object.getOwnPropertyNames(value).length === 0 &&
       Object.getOwnPropertySymbols(value).length === 0
     ) {
       throw new TypeError("Cannot utilize empty objects.");
-    } else if (Array.isArray(value) && value.length === 0) {
-      throw new TypeError("Cannot utilize empty arrays.");
-    } else if (value === null) {
-      throw new TypeError("Cannot utilize NULL primitives.");
-    } else if (typeof value === "boolean" || value instanceof Boolean) {
-      throw new TypeError("Cannot utilize boolean primitives.");
     } else {
+      /* Logics */
       super.add(value);
       return this;
     }
